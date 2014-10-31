@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<body>
+<head>
+    <script src="http://code.angularjs.org/1.2.6/angular.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-animate.js"></script>
+    <script src="app.js"></script>
+</head>
+
+
+<link type="text/css" rel="stylesheet" href="./main.css">
+
+
+<div class="container row" ng-app="app" ng-controller="AppCtrl">
+    <div class="logo col-md-8">
+        <img src="ng-instagram.png" alt="logo"/>
+    </div>
+    <div class="searchBox col-md-8">
+        <form name="searchForm" ng-submit="startSearch(searchForm.$valid)" novalidate>
+            <h3 ng-show="searching == true">Now searching...</h3>
+            <h3 ng-show="searching == false">Enter a single word below:</h3>
+            <input class="" type="text" name="searchTerm" ng-model="searchTerm" ng-minlength=1
+                   ng-maxlength="15" required/>
+
+            <div>
+                <h3 ng-show="apiError == true">Something has gone horribly wrong with our API calls,
+                    try a different
+                    search</h3>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg dn-bounce">
+                <span class="engage" ng-show="goodSearch == true">Make it so</span>
+                <span class="engage" ng-show="goodSearch == false">Search can't be blank, try again</span>
+            </button>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h2 ng-show="searching == false">Search Phrase: {{searchTerm}}</h2>
+            <h2 ng-show="searching == dontShow"></h2>
+            <h2 ng-show="searching == true">Now searching for: {{searchTerm}}</h2>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-4">
+            <h2>Japanese:</h2>
+
+            <h2>{{ translationJapanese }}</h2>
+
+            <div class="animate" ng-repeat="object in japanese">
+                <a href="{{object.link}}">
+                    <img ng-src={{object.images.low_resolution.url}}>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <h2>Russian:</h2>
+
+            <h2>{{ translationRussian }}</h2>
+
+            <div class="animate" ng-repeat="object in russian">
+                <a href="{{object.link}}">
+                    <img ng-src={{object.images.low_resolution.url}}>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+            <h2>French:</h2>
+
+            <h2>{{ translationFrench }}</h2>
+
+            <div class="animate" ng-repeat="object in french">
+                <a href="{{object.link}}">
+                    <img ng-src={{object.images.low_resolution.url}}>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
+
